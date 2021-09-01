@@ -1,6 +1,7 @@
 package dev.patika.thirdhomework.service;
 
 
+import dev.patika.thirdhomework.entity.Instructor;
 import dev.patika.thirdhomework.entity.Student;
 import dev.patika.thirdhomework.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -68,4 +69,29 @@ public class StudentService implements BaseService<Student> {
         student1.setGender(student.getGender());
         repository.save(student1);
     }
+
+
+    @Transactional(readOnly = true)
+    public List<?> getStudentGender(){
+
+        return repository.getStudentGender();
+    }
+
+    @Transactional
+    public void deleteAllByName(String name){
+        repository.deleteAllByName(name);
+
+    }
+
+    @Transactional(readOnly = true)
+    public List<Student> findAllByName(String name) {
+        List<Student> studentList = new ArrayList<>();
+        Iterable<Student> studentIter = repository.findAllByName(name);
+        studentIter.iterator().forEachRemaining(studentList::add);
+        return studentList;
+    }
+
+
+
+
 }

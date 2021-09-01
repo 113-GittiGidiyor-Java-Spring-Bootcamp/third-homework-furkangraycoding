@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Integer> {
-
+        List<Course> deleteByCourseName(String name);
+        List<Course> findAllByCourseName(String name);
 
 }

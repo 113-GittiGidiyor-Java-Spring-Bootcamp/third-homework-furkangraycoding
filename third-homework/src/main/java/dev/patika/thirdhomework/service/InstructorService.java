@@ -70,7 +70,7 @@ public class InstructorService implements BaseService<Instructor> {
         repository.save(instructor1);
     }
 
-
+    @Transactional(readOnly = true)
     public List<Instructor> getMaxSalary() {
 
         List<Instructor>  result= repository.getMaxSalary();
@@ -81,7 +81,7 @@ public class InstructorService implements BaseService<Instructor> {
         }
         return out;
     }
-
+    @Transactional(readOnly = true)
     public List<Instructor> getMinSalary() {
 
         List<Instructor>  result= repository.getMinSalary();
@@ -92,4 +92,22 @@ public class InstructorService implements BaseService<Instructor> {
         }
         return out;
     }
+
+
+    @Transactional
+    public void deleteAllByName(String name) {
+        repository.deleteAllByName(name);
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public List<Instructor> findAllByName(String name) {
+        List<Instructor> instructorList = new ArrayList<>();
+        Iterable<Instructor> instructorIter = repository.findAllByName(name);
+        instructorIter.iterator().forEachRemaining(instructorList::add);
+        return instructorList;
+    }
+
+
 }

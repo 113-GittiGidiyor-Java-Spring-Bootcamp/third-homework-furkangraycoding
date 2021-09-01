@@ -74,8 +74,15 @@ public class InstructorController {
         return instructorService.getMinSalary();
     }
 
+    @DeleteMapping("/deleteInstuctorAllByName/{name}")
+    public void deleteAllByName(@PathVariable String name){
+        instructorService.deleteAllByName(name);
+    }
 
 
+    @GetMapping("/findInstructorAllByName/{name}")
+    public ResponseEntity<List<Instructor>> findAllByName(@PathVariable String name){
 
-
+        return new ResponseEntity<>(instructorService.findAllByName(name), HttpStatus.OK);
+    }
 }

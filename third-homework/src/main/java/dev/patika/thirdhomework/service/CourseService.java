@@ -74,4 +74,19 @@ public class CourseService implements BaseService<Course> {
         repository.save(course1);
     }
 
+
+    @Transactional
+    public void deleteByCourseName(String name) {
+        repository.deleteByCourseName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Course> findAllByCourseName(String name) {
+        List<Course> courseList = new ArrayList<>();
+        Iterable<Course> courseIter = repository.findAllByCourseName(name);
+        courseIter.iterator().forEachRemaining(courseList::add);
+        return courseList;
+    }
+
+
 }

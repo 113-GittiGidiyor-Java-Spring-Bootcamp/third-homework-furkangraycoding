@@ -64,9 +64,16 @@ public class CourseController {
         return "Updated...";
     }
 
+    @DeleteMapping("/deleteCourseAllByName/{name}")
+    public void deleteByCourseName(@PathVariable String name){
+        courseService.deleteByCourseName(name);
+    }
 
+    @GetMapping("/findAllByCourseName/{name}")
+    public ResponseEntity<List<Course>> findAllByCourseName(@PathVariable String name){
 
-
+        return new ResponseEntity<>(courseService.findAllByCourseName(name), HttpStatus.OK);
+    }
 
 
 }

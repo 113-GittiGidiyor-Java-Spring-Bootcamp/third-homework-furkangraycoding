@@ -1,6 +1,7 @@
 package dev.patika.thirdhomework.controller;
 
 
+import dev.patika.thirdhomework.entity.Instructor;
 import dev.patika.thirdhomework.entity.Student;
 import dev.patika.thirdhomework.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,24 @@ public class StudentController {
     public String updateById(@RequestBody Student student, @PathVariable int id){
         studentService.updateById(student,id);
         return "Updated...";
+    }
+
+    @GetMapping("/getStudentGender")
+    public List<?>  getStudentGender(){
+        return studentService.getStudentGender();
+    }
+
+    @DeleteMapping("/deleteStudentAllByName/{name}")
+    public void deleteAllByName(@PathVariable String name){
+        studentService.deleteAllByName(name);
+    }
+
+
+
+    @GetMapping("/findStudentAllByName/{name}")
+    public ResponseEntity<List<Student>> findAllByName(@PathVariable String name){
+
+        return new ResponseEntity<>(studentService.findAllByName(name), HttpStatus.OK);
     }
 
 
